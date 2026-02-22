@@ -181,6 +181,6 @@
         "exec": "echo '⏻'",
         "interval": "once",
         "tooltip": false,
-        "on-click": "wlogout"
+        "on-click": "~/.local/bin/power-menu"
     }
 }
