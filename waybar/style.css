@@ -133,6 +133,19 @@ tooltip label {
     background: alpha(@surface0, 0.3);
 }
 
+/* ── Bluetooth ──────────────────────────────────────────────────────── */
+#bluetooth {
+    color: @sapphire;
+}
+
+#bluetooth.off {
+    color: @overlay0;
+}
+
+#bluetooth.disabled {
+    color: @overlay0;
+}
+
 /* ── Network ────────────────────────────────────────────────────────── */
 #network {
     color: @sapphire;
