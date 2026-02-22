@@ -49,7 +49,8 @@ dotfiles/
 | `SUPER + Q` | Close active window |
 | `SUPER + R` | Open app launcher (Walker) |
 | `SUPER + B` | Open browser (Chrome) |
-| `SUPER + E` | Open file manager |
+| `SUPER + N` | Open VS Code |
+| `SUPER + F` | Open file manager |
 | `SUPER + V` | Toggle floating |
 | `SUPER + SHIFT + R` | Reload Hyprland + Waybar + Walker |
 | `SUPER + SHIFT + E` | Open power menu |

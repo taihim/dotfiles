@@ -1,11 +1,11 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 39,
+    "height": 26,
     "spacing": 4,
     "margin-top": 0,
-    "margin-left": 10,
-    "margin-right": 10,
+    "margin-left": 0,
+    "margin-right": 0,
 
     "modules-left": [
         "hyprland/workspaces",
@@ -43,9 +43,7 @@
             "8": "8",
             "9": "9",
             "10": "10",
-            "urgent": "",
-            "active": "",
-            "default": ""
+            "urgent": ""
         },
         "persistent-workspaces": {
             "DP-1": [ 1, 2, 3, 4, 5, 6, 7 ],

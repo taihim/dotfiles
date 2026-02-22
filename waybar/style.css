@@ -91,7 +91,7 @@ tooltip label {
 
 #workspaces button.active {
     background: @blue;
-    color: @base;
+    color: @crust;
     font-weight: bold;
     border-color: @lavender;
 }
