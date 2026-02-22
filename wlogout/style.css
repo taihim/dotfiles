@@ -1,0 +1,87 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    background-image: none;
+}
+
+window {
+    background-color: rgba(17, 17, 27, 0.9);
+}
+
+button {
+    color: #cdd6f4;
+    background-color: rgba(49, 50, 68, 0.5);
+    border: 1px solid rgba(69, 71, 90, 0.6);
+    border-radius: 12px;
+    font-size: 14px;
+    margin: 8px;
+    transition: all 0.2s ease;
+}
+
+button:focus,
+button:active,
+button:hover {
+    background-color: rgba(137, 180, 250, 0.15);
+    border-color: #89b4fa;
+    color: #89b4fa;
+    outline-style: none;
+}
+
+#lock {
+    background-image: url("/usr/share/wlogout/assets/lock.svg");
+}
+#lock:hover {
+    background-image: url("/usr/share/wlogout/assets/lock.svg");
+    background-color: rgba(116, 199, 236, 0.15);
+    border-color: #74c7ec;
+    color: #74c7ec;
+}
+
+#suspend {
+    background-image: url("/usr/share/wlogout/assets/suspend.svg");
+}
+#suspend:hover {
+    background-image: url("/usr/share/wlogout/assets/suspend.svg");
+    background-color: rgba(148, 226, 213, 0.15);
+    border-color: #94e2d5;
+    color: #94e2d5;
+}
+
+#logout {
+    background-image: url("/usr/share/wlogout/assets/logout.svg");
+}
+#logout:hover {
+    background-image: url("/usr/share/wlogout/assets/logout.svg");
+    background-color: rgba(203, 166, 247, 0.15);
+    border-color: #cba6f7;
+    color: #cba6f7;
+}
+
+#reboot {
+    background-image: url("/usr/share/wlogout/assets/reboot.svg");
+}
+#reboot:hover {
+    background-image: url("/usr/share/wlogout/assets/reboot.svg");
+    background-color: rgba(249, 226, 175, 0.15);
+    border-color: #f9e2af;
+    color: #f9e2af;
+}
+
+#hibernate {
+    background-image: url("/usr/share/wlogout/assets/hibernate.svg");
+}
+#hibernate:hover {
+    background-image: url("/usr/share/wlogout/assets/hibernate.svg");
+    background-color: rgba(250, 179, 135, 0.15);
+    border-color: #fab387;
+    color: #fab387;
+}
+
+#shutdown {
+    background-image: url("/usr/share/wlogout/assets/shutdown.svg");
+}
+#shutdown:hover {
+    background-image: url("/usr/share/wlogout/assets/shutdown.svg");
+    background-color: rgba(243, 139, 168, 0.15);
+    border-color: #f38ba8;
+    color: #f38ba8;
+}
