@@ -14,5 +14,4 @@ configuration {
     me-accept-entry:       "MouseDPrimary";
 }
 
-@theme "~/.config/rofi/catppuccin-mocha.rasi"
-
+@theme "~/.config/rofi/Arc-Dark.rasi"
