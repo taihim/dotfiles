@@ -1,0 +1,205 @@
+/* ── Catppuccin Mocha palette ────────────────────────────────────────── */
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
+@define-color text   #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color overlay0 #6c7086;
+@define-color blue   #89b4fa;
+@define-color lavender #b4befe;
+@define-color sapphire #74c7ec;
+@define-color sky    #89dceb;
+@define-color teal   #94e2d5;
+@define-color green  #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color peach  #fab387;
+@define-color red    #f38ba8;
+@define-color pink   #f5c2e7;
+@define-color mauve  #cba6f7;
+
+/* ── Global reset ───────────────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+/* ── Bar ────────────────────────────────────────────────────────────── */
+window#waybar {
+    background: alpha(@base, 0.85);
+    color: @text;
+    border-radius: 12px;
+    border: 1px solid alpha(@surface1, 0.6);
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+tooltip {
+    background: @mantle;
+    border: 1px solid @surface1;
+    border-radius: 8px;
+    color: @text;
+}
+
+tooltip label {
+    color: @text;
+}
+
+/* ── Shared module style ────────────────────────────────────────────── */
+#workspaces,
+#window,
+#clock,
+#mpris,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#tray,
+#custom-separator,
+#custom-power {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    background: alpha(@surface0, 0.5);
+    color: @text;
+    transition: all 0.2s ease;
+}
+
+/* ── Workspaces ─────────────────────────────────────────────────────── */
+#workspaces {
+    background: transparent;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 2px 8px;
+    margin: 2px 2px;
+    border-radius: 6px;
+    background: alpha(@surface0, 0.5);
+    color: @subtext0;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    background: alpha(@surface1, 0.8);
+    color: @text;
+}
+
+#workspaces button.active {
+    background: @blue;
+    color: @base;
+    font-weight: bold;
+    border-color: @lavender;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @base;
+}
+
+/* ── Window title ───────────────────────────────────────────────────── */
+#window {
+    color: @subtext0;
+    font-style: italic;
+}
+
+/* ── Clock ──────────────────────────────────────────────────────────── */
+#clock {
+    background: alpha(@blue, 0.15);
+    color: @blue;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid alpha(@blue, 0.3);
+}
+
+/* ── Media ──────────────────────────────────────────────────────────── */
+#mpris {
+    color: @green;
+    background: alpha(@green, 0.1);
+    border: 1px solid alpha(@green, 0.25);
+}
+
+/* ── Audio ──────────────────────────────────────────────────────────── */
+#pulseaudio {
+    color: @teal;
+}
+
+#pulseaudio.muted {
+    color: @overlay0;
+    background: alpha(@surface0, 0.3);
+}
+
+/* ── Network ────────────────────────────────────────────────────────── */
+#network {
+    color: @sapphire;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+/* ── CPU ────────────────────────────────────────────────────────────── */
+#cpu {
+    color: @peach;
+}
+
+#cpu.warning {
+    color: @yellow;
+}
+
+#cpu.critical {
+    color: @red;
+}
+
+/* ── Memory ─────────────────────────────────────────────────────────── */
+#memory {
+    color: @mauve;
+}
+
+#memory.warning {
+    color: @yellow;
+}
+
+#memory.critical {
+    color: @red;
+}
+
+/* ── Separator ──────────────────────────────────────────────────────── */
+#custom-separator {
+    background: transparent;
+    color: @surface1;
+    padding: 0 4px;
+    font-size: 16px;
+}
+
+/* ── Tray ───────────────────────────────────────────────────────────── */
+#tray {
+    background: alpha(@surface0, 0.4);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: alpha(@red, 0.3);
+}
+
+/* ── Power button ───────────────────────────────────────────────────── */
+#custom-power {
+    color: @red;
+    background: alpha(@red, 0.1);
+    border: 1px solid alpha(@red, 0.25);
+    font-size: 16px;
+    padding: 4px 12px;
+}
+
+#custom-power:hover {
+    background: alpha(@red, 0.25);
+    color: @base;
+}
