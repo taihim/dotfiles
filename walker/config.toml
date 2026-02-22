@@ -12,20 +12,19 @@ quick_activate = []
 max_results = 256
 default = [
   "desktopapplications",
-  "websearch",
 ]
 
 [[providers.prefixes]]
 prefix = "/"
-provider = "providerlist"
-
-[[providers.prefixes]]
-prefix = "."
 provider = "files"
 
 [[providers.prefixes]]
-prefix = ":"
+prefix = "."
 provider = "symbols"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "providerlist"
 
 [[providers.prefixes]]
 prefix = "="

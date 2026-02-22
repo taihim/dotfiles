@@ -88,6 +88,9 @@ yay -S \
   elephant-desktopapplications-bin \
   elephant-websearch-bin \
   elephant-files-bin \
+  elephant-calc-bin \
+  elephant-clipboard-bin \
+  elephant-symbols-bin \
 ```
 
 | Package | Purpose |
@@ -107,6 +110,9 @@ yay -S \
 | `elephant-desktopapplications-bin` | Desktop apps provider plugin for elephant |
 | `elephant-websearch-bin` | Web search provider plugin for elephant |
 | `elephant-files-bin` | File search provider plugin for elephant |
+| `elephant-calc-bin` | Calculator provider plugin for elephant |
+| `elephant-clipboard-bin` | Clipboard history provider plugin for elephant |
+| `elephant-symbols-bin` | Unicode symbols provider plugin for elephant |
 
 ### Post-install: enable elephant service
 
@@ -123,11 +129,11 @@ systemctl --user start elephant
 |---|---|
 | *(none)* | App search |
 | `=` | Calculator |
-| `.` | File search |
+| `/` | File search |
+| `.` | Symbols |
 | `$` | Clipboard |
 | `@` | Web search |
-| `:` | Symbols |
-| `/` | Switch provider |
+| `:` | Switch provider |
 
 ---
 
