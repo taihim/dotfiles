@@ -19,6 +19,7 @@ dotfiles/
 │
 ├── hypr/                     # Hyprland config (~/.config/hypr/)
 │   ├── hyprland.conf         # Main config (keybinds, autostart, window rules)
+│   ├── hyprlock.conf         # Lock screen (Catppuccin Mocha, clock + password field)
 │   └── monitors.conf         # Monitor layout, refresh rates, scale, workspace assignments
 │
 ├── networkmanager-dmenu/     # (~/.config/networkmanager-dmenu/)
@@ -46,8 +47,12 @@ dotfiles/
 | Keybind | Action |
 |---|---|
 | `SUPER + T` | Open terminal (Alacritty) |
+| `SUPER + Enter` | Open btop |
 | `SUPER + Q` | Close active window |
 | `SUPER + R` | Open app launcher (Walker) |
+| `SUPER + M` | Open Spotify |
+| `SUPER + G` | Open Discord |
+| `SUPER + L` | Lock screen |
 | `SUPER + B` | Open browser (Chrome) |
 | `SUPER + N` | Open VS Code |
 | `SUPER + F` | Open file manager |
@@ -69,6 +74,7 @@ dotfiles/
 ```bash
 sudo pacman -S \
   waybar \
+  hyprlock \
   rofi-wayland \
   networkmanager-dmenu \
   blueman \
@@ -97,6 +103,7 @@ yay -S \
 | Package | Purpose |
 |---|---|
 | `waybar` | Status bar |
+| `hyprlock` | Screen locker |
 | `rofi-wayland` | Dmenu replacement (used by audio-picker, networkmanager-dmenu, power-menu) |
 | `networkmanager-dmenu` | NetworkManager frontend via rofi |
 | `blueman` | Bluetooth manager (GUI + tray applet) |
