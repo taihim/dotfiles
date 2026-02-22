@@ -8,7 +8,7 @@ CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu \
     -theme-str 'listview { lines: 3; }')
 
 case "$CHOICE" in
-    "󰍃  Logout")    loginctl terminate-user "$USER" ;;
+    "󰍃  Logout")    command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit ;;
     "󰑓  Reboot")    systemctl reboot ;;
     "󰐥  Shutdown")  systemctl poweroff ;;
 esac

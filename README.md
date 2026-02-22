@@ -20,6 +20,7 @@ dotfiles/
 ├── hypr/                     # Hyprland config (~/.config/hypr/)
 │   ├── hyprland.conf         # Main config (keybinds, autostart, window rules)
 │   ├── hyprlock.conf         # Lock screen (Catppuccin Mocha, clock + password field)
+│   ├── hyprpaper.conf        # Wallpaper config (~/Pictures/Wallpapers/)
 │   └── monitors.conf         # Monitor layout, refresh rates, scale, workspace assignments
 │
 ├── networkmanager-dmenu/     # (~/.config/networkmanager-dmenu/)
@@ -75,6 +76,7 @@ dotfiles/
 sudo pacman -S \
   waybar \
   hyprlock \
+  hyprpaper \
   rofi-wayland \
   networkmanager-dmenu \
   blueman \
@@ -83,13 +85,16 @@ sudo pacman -S \
   pipewire \
   asusctl \
   supergfxctl \
-  rog-control-center
+  rog-control-center \
+  discord \
+  okular
 ```
 
 ### AUR
 
 ```bash
 yay -S \
+  spotify \
   walker \
   elephant-bin \
   elephant-desktopapplications-bin \
@@ -104,6 +109,7 @@ yay -S \
 |---|---|
 | `waybar` | Status bar |
 | `hyprlock` | Screen locker |
+| `hyprpaper` | Wallpaper setter |
 | `rofi-wayland` | Dmenu replacement (used by audio-picker, networkmanager-dmenu, power-menu) |
 | `networkmanager-dmenu` | NetworkManager frontend via rofi |
 | `blueman` | Bluetooth manager (GUI + tray applet) |
@@ -113,6 +119,9 @@ yay -S \
 | `asusctl` | ASUS laptop daemon (fan curves, power profiles, ROG features) |
 | `supergfxctl` | GPU switching between AMD iGPU and Nvidia dGPU |
 | `rog-control-center` | GUI frontend for asusctl |
+| `discord` | Discord chat client |
+| `okular` | PDF/document viewer |
+| `spotify` | Spotify music client (AUR) |
 | `walker` | App launcher with provider prefixes |
 | `elephant-bin` | Backend service for Walker |
 | `elephant-desktopapplications-bin` | Desktop apps provider plugin for elephant |
