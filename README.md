@@ -31,6 +31,9 @@ dotfiles/
 ├── walker/                   # Walker app launcher (~/.config/walker/)
 │   └── config.toml           # Providers, prefixes, keybinds
 │
+├── elephant/                 # Elephant backend config (~/.config/elephant/)
+│   └── websearch.toml        # Web search engine (Google)
+│
 └── waybar/                   # Status bar (~/.config/waybar/)
     ├── config.jsonc          # Module layout and configuration
     └── style.css             # Catppuccin Mocha styling
@@ -71,7 +74,6 @@ sudo pacman -S \
   playerctl \
   wireplumber \
   pipewire \
-  xorg-xrandr \
   asusctl \
   supergfxctl \
   rog-control-center
@@ -84,7 +86,8 @@ yay -S \
   walker \
   elephant-bin \
   elephant-desktopapplications-bin \
-  catppuccin-sddm-theme-mocha
+  elephant-websearch-bin \
+  elephant-files-bin \
 ```
 
 | Package | Purpose |
@@ -96,14 +99,14 @@ yay -S \
 | `playerctl` | Media player control (MPRIS waybar module) |
 | `wireplumber` | PipeWire session manager |
 | `pipewire` | Audio server |
-| `xorg-xrandr` | Display config for SDDM login screen |
 | `asusctl` | ASUS laptop daemon (fan curves, power profiles, ROG features) |
 | `supergfxctl` | GPU switching between AMD iGPU and Nvidia dGPU |
 | `rog-control-center` | GUI frontend for asusctl |
 | `walker` | App launcher with provider prefixes |
 | `elephant-bin` | Backend service for Walker |
 | `elephant-desktopapplications-bin` | Desktop apps provider plugin for elephant |
-| `catppuccin-sddm-theme-mocha` | Catppuccin Mocha SDDM login screen theme |
+| `elephant-websearch-bin` | Web search provider plugin for elephant |
+| `elephant-files-bin` | File search provider plugin for elephant |
 
 ### Post-install: enable elephant service
 

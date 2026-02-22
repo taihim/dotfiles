@@ -35,6 +35,11 @@ provider = "calc"
 prefix = "@"
 provider = "websearch"
 
+[websearch]
+entries = [
+  { name = "Google", url = "https://www.google.com/search?q=%s", switcher_only = false }
+]
+
 [[providers.prefixes]]
 prefix = "$"
 provider = "clipboard"
