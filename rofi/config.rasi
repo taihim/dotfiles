@@ -1,0 +1,18 @@
+configuration {
+    modi:                  "drun,run,window";
+    show-icons:            true;
+    icon-theme:            "Papirus-Dark";
+    drun-display-format:   "{name}";
+    window-format:         "{w} · {c} · {t}";
+    display-drun:          " Apps";
+    display-run:           " Run";
+    display-window:        " Windows";
+    font:                  "MesloLGS Nerd Font 12";
+    terminal:              "alacritty";
+    hover-select:          true;
+    me-select-entry:       "MousePrimary";
+    me-accept-entry:       "MouseDPrimary";
+}
+
+@theme "~/.config/rofi/catppuccin-mocha.rasi"
+

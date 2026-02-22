@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Audio source/sink picker using wofi + pactl
 
-MODE=$(printf "Output (Sink)\nInput (Source)" | wofi --dmenu --prompt "Audio:" --lines 2)
+MODE=$(printf "Output (Sink)\nInput (Source)" | rofi -dmenu --prompt "Audio:" --lines 2)
 
 case "$MODE" in
     "Output (Sink)")
@@ -11,7 +11,7 @@ case "$MODE" in
             /^\s+Description:/ { desc = substr($0, index($0,$2)); print idx": "desc }
         ')
 
-        CHOICE=$(echo "$SINKS" | wofi --dmenu --prompt "Output:" --lines 10)
+        CHOICE=$(echo "$SINKS" | rofi -dmenu --prompt "Output:" --lines 10)
         [ -z "$CHOICE" ] && exit 0
 
         IDX=$(echo "$CHOICE" | cut -d: -f1)
@@ -30,7 +30,7 @@ case "$MODE" in
             /^\s+Name:/ && !/monitor/ { print idx": "desc }
         ')
 
-        CHOICE=$(echo "$SOURCES" | wofi --dmenu --prompt "Input:" --lines 10)
+        CHOICE=$(echo "$SOURCES" | rofi -dmenu --prompt "Input:" --lines 10)
         [ -z "$CHOICE" ] && exit 0
 
         IDX=$(echo "$CHOICE" | cut -d: -f1)
