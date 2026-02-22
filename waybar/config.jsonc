@@ -126,6 +126,7 @@
             "default": ["", "", ""]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "~/.local/bin/audio-picker",
         "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-",
         "smooth-scrolling-threshold": 1
@@ -138,7 +139,7 @@
         "format-linked": "󰈀 {ifname} (no IP)",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {gwaddr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
-        "on-click": "alacritty -e nmtui"
+        "on-click": "networkmanager_dmenu"
     },
 
     "cpu": {
@@ -164,7 +165,9 @@
     },
 
     "custom/power": {
-        "format": "",
+        "format": "⏻",
+        "exec": "echo",
+        "interval": "once",
         "tooltip": false,
         "on-click": "wlogout"
     }

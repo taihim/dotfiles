@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Audio source/sink picker using wofi + pactl
+
+MODE=$(printf "Output (Sink)\nInput (Source)" | wofi --dmenu --prompt "Audio:" --lines 2)
+
+case "$MODE" in
+    "Output (Sink)")
+        # List sinks: extract index and description
+        SINKS=$(pactl list sinks | awk '
+            /^Sink #/ { idx = substr($2, 2) }
+            /^\s+Description:/ { desc = substr($0, index($0,$2)); print idx": "desc }
+        ')
+
+        CHOICE=$(echo "$SINKS" | wofi --dmenu --prompt "Output:" --lines 10)
+        [ -z "$CHOICE" ] && exit 0
+
+        IDX=$(echo "$CHOICE" | cut -d: -f1)
+        pactl set-default-sink "$IDX"
+
+        # Move all active playback streams to the new sink
+        pactl list sink-inputs | grep "^Sink Input #" | awk '{print substr($3,2)}' | \
+            xargs -I{} pactl move-sink-input {} "$IDX"
+        ;;
+
+    "Input (Source)")
+        # List sources (exclude monitors)
+        SOURCES=$(pactl list sources | awk '
+            /^Source #/ { idx = substr($2, 2) }
+            /^\s+Description:/ { desc = substr($0, index($0,$2)) }
+            /^\s+Name:/ && !/monitor/ { print idx": "desc }
+        ')
+
+        CHOICE=$(echo "$SOURCES" | wofi --dmenu --prompt "Input:" --lines 10)
+        [ -z "$CHOICE" ] && exit 0
+
+        IDX=$(echo "$CHOICE" | cut -d: -f1)
+        pactl set-default-source "$IDX"
+
+        # Move all active recording streams to the new source
+        pactl list source-outputs | grep "^Source Output #" | awk '{print substr($3,2)}' | \
+            xargs -I{} pactl move-source-output {} "$IDX"
+        ;;
+esac
