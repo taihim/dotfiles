@@ -64,6 +64,7 @@ dotfiles/
 | `SUPER + 1–9` | Switch workspace |
 | `SUPER + SHIFT + 1–9` | Move window to workspace |
 | `SUPER + S` | Toggle scratchpad |
+| `SUPER + SHIFT + S` | Screenshot selected area to clipboard |
 | `SUPER + Arrow keys` | Move focus |
 
 ---
@@ -87,7 +88,8 @@ sudo pacman -S \
   supergfxctl \
   rog-control-center \
   discord \
-  okular
+  okular \
+  grimblast
 ```
 
 ### AUR
@@ -121,6 +123,7 @@ yay -S \
 | `rog-control-center` | GUI frontend for asusctl |
 | `discord` | Discord chat client |
 | `okular` | PDF/document viewer |
+| `grimblast` | Screenshot tool — area selection to clipboard (`grim` + `slurp` wrapper) |
 | `spotify` | Spotify music client (AUR) |
 | `walker` | App launcher with provider prefixes |
 | `elephant-bin` | Backend service for Walker |
