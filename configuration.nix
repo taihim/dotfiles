@@ -202,6 +202,27 @@ in
   home-manager.users.taihim = { pkgs, ... }: {    
     home.stateVersion = "25.11"; 
 
+    programs.bash = {
+    enable = true;
+    shellAliases = {
+      rebuild = "sudo nixos-rebuild switch";
+     };
+    };
+
+    xdg.mimeApps = {
+     enable = true;
+     defaultApplications = {
+      "application/pdf" = [ "org.kde.okular.desktop" ];
+      
+      "x-scheme-handler/discord" = [ "vesktop.desktop" ];
+      "text/html" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/http" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/https" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/about" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/unknown" = [ "google-chrome.desktop" ];
+     };
+    };
+
     # User-level utilities    
     home.packages = with pkgs; [
       fastfetch
@@ -293,13 +314,14 @@ in
         # Your Keyboard Shortcuts Map
         bind = [
           # System Controls
-          "$mainMod, Q, exec, ghostty"
+          "$mainMod, T, exec, ghostty"
           "$mainMod, R, exec, rofi -show drun -show-icons"
           "$mainMod, B, exec, google-chrome-stable"
           "$mainMod, D, exec, vesktop"
-          "$mainMod, S, exec, spotify"
+          "$mainMod, M, exec, spotify"
           "$mainMod ALT, B, exec, blueman-manager"
-          "$mainMod, C, killactive"
+          "$mainMod, F, exec, dolphin"
+          "$mainMod, Q, killactive"
           "$mainMod M, M, exit" #logout
           "$mainMod, Return, exec, ghostty -e btop"
 
@@ -314,12 +336,23 @@ in
           "$mainMod, 2, workspace, 2"
           "$mainMod, 3, workspace, 3"
           "$mainMod, 4, workspace, 4"
+          "$mainMod, 5, workspace, 5"
+          "$mainMod, 6, workspace, 6"
+          "$mainMod, 7, workspace, 7"
+          "$mainMod, 8, workspace, 8"
+          "$mainMod, 9, workspace, 9"
+
 
           # Move Active Window to Workspace
           "$mainMod SHIFT, 1, movetoworkspace, 1"
           "$mainMod SHIFT, 2, movetoworkspace, 2"
           "$mainMod SHIFT, 3, movetoworkspace, 3"
           "$mainMod SHIFT, 4, movetoworkspace, 4"
+          "$mainMod SHIFT, 5, movetoworkspace, 5"
+          "$mainMod SHIFT, 6, movetoworkspace, 6"
+          "$mainMod SHIFT, 7, movetoworkspace, 7"
+          "$mainMod SHIFT, 8, movetoworkspace, 8"
+          "$mainMod SHIFT, 9, movetoworkspace, 9"
         ];
 
         # Repeating hardware shortcuts (Volume keys using pamixer)
@@ -339,7 +372,6 @@ in
     programs.ghostty = {
       enable = true;
       settings = {
-#        theme = "catppuccin-macchiato";
         font-family = "JetBrainsMono Nerd Font";
         background-opacity = "0.85";
         background-blur = true;
@@ -348,5 +380,5 @@ in
         window-decoration = false;     # Changed from window-decorations to window-decoration
       };
     };
-    };
- }
+  }; 
+}
