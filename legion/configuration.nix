@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 let
@@ -22,10 +18,6 @@ in
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -71,13 +63,11 @@ in
   };
 
   # Limit the total number of boot entries shown in the menu
-  boot.loader.systemd-boot.configurationLimit = 5; # Keeps your current setup + 4 recent backups
+  boot.loader.systemd-boot.configurationLimit = 3;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
     ghostty
@@ -108,19 +98,11 @@ in
     blueman
     pamixer
     pavucontrol
-    asusctl
-    supergfxctl
   ];
 
   virtualisation.docker.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "25.11";
   
   programs.hyprland.enable = true;
   
@@ -182,11 +164,6 @@ in
     };
   };
   
-  services.asusd = {
-    enable = true;
-    enableUserService = true;
-  };
-  
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -230,7 +207,7 @@ in
     
     programs.home-manager.enable = true;
     
-   # =========================================================================
+    # =========================================================================
     # NATIVE HYPRLAND CONFIGURATION VIA HOME MANAGER
     # =========================================================================
     wayland.windowManager.hyprland = {
@@ -242,22 +219,19 @@ in
         "$mainMod" = "SUPER";
 
         # Monitor layout (Automatically configures your laptop panel)
-        monitor = [
-          "DP-1,3440x1440@144,0x0,1"
-          "eDP-1,2560x1440@120,3440x0,1.6"
-        ];
+        monitor = [ ",preferred,auto,1" ];
 
-        workspace = [
-         "1,monitor:DP-1,default:true"
-         "2,monitor:DP-1"
-         "3,monitor:DP-1"
-         "4,monitor:DP-1"
-         "5,monitor:DP-1"
-         "6,monitor:DP-1"
-         "7,monitor:DP-1"
-         "8,monitor:eDP-1,default:true"
-         "9,monitor:eDP-1"
-        ];
+        #workspace = [
+        # "1,monitor:DP-1,default:true"
+        # "2,monitor:DP-1"
+        # "3,monitor:DP-1"
+        # "4,monitor:DP-1"
+        # "5,monitor:DP-1"
+        # "6,monitor:DP-1"
+        # "7,monitor:DP-1"
+        # "8,monitor:eDP-1,default:true"
+        # "9,monitor:eDP-1"
+        #];
 
         # Startup Applications (Executes once when you log in)
         exec-once = [
