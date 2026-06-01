@@ -241,8 +241,9 @@ in
       enable = true;
       settings = {
         font-family = "JetBrainsMono Nerd Font";
+        background = "000000";
         background-opacity = "0.85";
-        background-blur = true;
+        background-blur = false;
         window-padding-x = 12;
         window-padding-y = 12;
         window-decoration = false;
