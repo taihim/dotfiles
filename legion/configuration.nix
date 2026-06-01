@@ -221,6 +221,7 @@ in
       enable = true;
       shellAliases = {
         rebuild = "sudo nixos-rebuild switch";
+        codex = "npx @openai/codex";
       };
     };
 
