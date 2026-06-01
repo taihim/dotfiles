@@ -320,10 +320,13 @@ in
           "$mainMod, B, exec, google-chrome-stable"
           "$mainMod, D, exec, vesktop"
           "$mainMod, M, exec, spotify"
+          "$mainMod, N, exec, code"
           "$mainMod ALT, B, exec, blueman-manager"
           "$mainMod, F, exec, dolphin"
           "$mainMod, C, killactive"
           "$mainMod SHIFT, L, exit"
+          "$mainMod SHIFT, P, exec, systemctl poweroff"
+          "$mainMod SHIFT, O, exec, systemctl reboot"
           "$mainMod, Return, exec, ghostty -e btop"
           "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
 
