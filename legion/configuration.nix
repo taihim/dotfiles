@@ -3,8 +3,25 @@
 { config, pkgs, ... }:
 
 let
-  sddmAstronautTheme = pkgs.sddm-astronaut.override {
-    embeddedTheme = "hyprland_kath";
+  qylockTheme = pkgs.stdenv.mkDerivation {
+    pname = "sddm-qylock-theme";
+    version = "cde4d11";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "taihim";
+      repo = "qylock";
+      rev = "cde4d11e9e3d385620becdc877a0521e40a55e47";
+      hash = "sha256-17kRwrkdfe+hJdChMxove73zNCKcSi0nmSrO8Fh8hz0=";
+    };
+
+    installPhase = ''
+      runHook preInstall
+
+      mkdir -p $out/share/sddm/themes
+      cp -r themes/* $out/share/sddm/themes/
+
+      runHook postInstall
+    '';
   };
 in
 {
@@ -78,7 +95,7 @@ in
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
    
@@ -88,8 +105,8 @@ in
         enableOffloadCmd = true;
       };
       # WARNING: Check these via `lspci | grep -E 'VGA|3D'` on the new Legion!
-      amdgpuBusId = "PCI:4:0:0";
-      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:196:0:0";
+      nvidiaBusId = "PCI:195:0:0";
     };
   };
 
@@ -136,7 +153,8 @@ in
     google-chrome spotify vesktop
     
     # Desktop & UI
-    ghostty rofi waybar sddmAstronautTheme
+    ghostty rofi waybar qylockTheme
+    grim slurp wl-clipboard
     kdePackages.dolphin kdePackages.kio-extras 
     kdePackages.breeze-icons kdePackages.okular
     
@@ -157,19 +175,36 @@ in
   # ===========================================================================
   # 5. DESKTOP ENVIRONMENT (SYSTEM LEVEL)
   # ===========================================================================
+  services.xserver.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
   
   programs.hyprland.enable = true;
+  programs.ssh.startAgent = true;
 
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
-    theme = "sddm-astronaut-theme";
-    extraPackages = [ sddmAstronautTheme ];
-    settings.General.InputMethod = "qtvirtualkeyboard";
+    wayland.enable = false;
+    theme = "pixel-dusk-city";
+    extraPackages = with pkgs; [
+      qylockTheme
+      kdePackages.qt5compat
+      kdePackages.qtdeclarative
+      kdePackages.qtmultimedia
+      kdePackages.qtsvg
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+    ];
+    settings = {
+      General.InputMethod = "";
+      X11.DisplayCommand = "${pkgs.writeShellScript "sddm-external-display" ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --primary --mode 3440x1440 --rate 59.97 --output eDP-1 --off
+      ''}";
+    };
   };
 
   # ===========================================================================
@@ -221,8 +256,22 @@ in
       settings = {
         "$mainMod" = "SUPER";
 
-        # Auto-detects display. Update with `hyprctl monitors` output later.
-        monitor = [ ",preferred,auto,1" ];
+        monitor = [
+          "DP-2,3440x1440@59.973,0x0,1"
+          "eDP-1,2560x1600@165,3440x0,1"
+        ];
+
+        workspace = [
+          "1,monitor:DP-2,default:true"
+          "2,monitor:DP-2"
+          "3,monitor:DP-2"
+          "4,monitor:DP-2"
+          "5,monitor:DP-2"
+          "6,monitor:DP-2"
+          "7,monitor:DP-2"
+          "8,monitor:eDP-1,default:true"
+          "9,monitor:eDP-1"
+        ];
 
         exec-once = [
           "waybar"
@@ -264,16 +313,17 @@ in
 
         bind = [
           # System Controls
-          "$mainMod, T, exec, ghostty"
+          "$mainMod, Q, exec, ghostty"
           "$mainMod, R, exec, rofi -show drun -show-icons"
           "$mainMod, B, exec, google-chrome-stable"
           "$mainMod, D, exec, vesktop"
           "$mainMod, M, exec, spotify"
           "$mainMod ALT, B, exec, blueman-manager"
           "$mainMod, F, exec, dolphin"
-          "$mainMod, Q, killactive"
-          "$mainMod M, M, exit"
+          "$mainMod, C, killactive"
+          "$mainMod SHIFT, L, exit"
           "$mainMod, Return, exec, ghostty -e btop"
+          "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
 
           # Focus Movement
           "$mainMod, h, movefocus, l"
@@ -312,6 +362,11 @@ in
         bindl = [
           ", XF86AudioMute, exec, pamixer -t"
           ", XF86AudioMicMute, exec, pamixer --default-source -t"
+        ];
+
+        bindm = [
+          "$mainMod, mouse:272, movewindow"
+          "$mainMod, mouse:273, resizewindow"
         ];
       };
     };
