@@ -154,7 +154,7 @@ in
     google-chrome spotify vesktop
     
     # Desktop & UI
-    ghostty rofi waybar qylockTheme
+    ghostty (rofi.override { plugins = [ rofi-calc ]; }) libqalculate waybar qylockTheme
     grim slurp wl-clipboard hypridle brightnessctl wev
     kdePackages.dolphin kdePackages.kio-extras 
     kdePackages.breeze-icons kdePackages.okular
@@ -346,6 +346,7 @@ in
           # System Controls
           "$mainMod, Q, exec, ghostty"
           "$mainMod, R, exec, rofi -show drun -show-icons"
+          "$mainMod SHIFT, R, exec, rofi -show calc -modes calc -no-show-match -no-sort -automatic-save-to-history"
           "$mainMod, B, exec, google-chrome-stable"
           "$mainMod, D, exec, vesktop"
           "$mainMod, M, exec, spotify"
