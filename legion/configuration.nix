@@ -145,6 +145,7 @@ in
   environment.systemPackages = with pkgs; [
     # Core Utilities
     vim gcc gnumake git curl btop fastfetch
+    stress-ng
     
     # Dev & Languages
     nodejs python3 uv vscode lazydocker bubblewrap
@@ -154,7 +155,7 @@ in
     
     # Desktop & UI
     ghostty rofi waybar qylockTheme
-    grim slurp wl-clipboard
+    grim slurp wl-clipboard hypridle brightnessctl wev
     kdePackages.dolphin kdePackages.kio-extras 
     kdePackages.breeze-icons kdePackages.okular
     
@@ -171,6 +172,11 @@ in
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   }; 
+
+  programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+  };
 
   # ===========================================================================
   # 5. DESKTOP ENVIRONMENT (SYSTEM LEVEL)
@@ -202,7 +208,7 @@ in
     settings = {
       General.InputMethod = "";
       X11.DisplayCommand = "${pkgs.writeShellScript "sddm-external-display" ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --primary --mode 3440x1440 --rate 59.97 --output eDP-1 --off
+        ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --primary --mode 3440x1440 --rate 179.98 --output eDP-1 --off
       ''}";
     };
   };
@@ -238,6 +244,29 @@ in
       };
     };
 
+    services.hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          ignore_dbus_inhibit = false;
+          ignore_systemd_inhibit = false;
+        };
+
+        listener = [
+          {
+            timeout = 900;
+            on-timeout = "hyprctl dispatch dpms off eDP-1";
+            on-resume = "hyprctl dispatch dpms on eDP-1";
+          }
+          {
+            timeout = 2700;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
+      };
+    };
+
     programs.ghostty = {
       enable = true;
       settings = {
@@ -259,7 +288,7 @@ in
         "$mainMod" = "SUPER";
 
         monitor = [
-          "DP-2,3440x1440@59.973,0x0,1"
+          "DP-2,3440x1440@179.98,0x0,1"
           "eDP-1,2560x1600@165,3440x0,1"
         ];
 
@@ -362,6 +391,8 @@ in
         bindel = [
           ", XF86AudioRaiseVolume, exec, pamixer -i 5"
           ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          ", XF86MonBrightnessUp, exec, brightnessctl -d amdgpu_bl2 set 5%+"
+          ", XF86MonBrightnessDown, exec, brightnessctl -d amdgpu_bl2 set 5%-"
         ];
 
         bindl = [
