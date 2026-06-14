@@ -231,6 +231,67 @@ in
       };
     };
 
+    programs.waybar = {
+      enable = true;
+      settings = {
+        mainBar = {
+          layer = "top";
+          position = "top";
+          height = 28;
+
+          modules-left = [
+            "hyprland/workspaces"
+            "hyprland/window"
+          ];
+
+          modules-center = [
+            "clock"
+          ];
+
+          modules-right = [
+            "pulseaudio"
+            "network"
+            "battery"
+            "tray"
+          ];
+
+          "hyprland/workspaces" = {
+            format = "{name}";
+            on-click = "activate";
+          };
+
+          "hyprland/window" = {
+            max-length = 70;
+            separate-outputs = true;
+          };
+
+          clock = {
+            format = "{:%H:%M}";
+            tooltip-format = "{:%A, %B %d, %Y}";
+          };
+
+          pulseaudio = {
+            format = "{icon} {volume}%";
+            format-muted = "muted";
+            format-icons = {
+              default = [ "vol" ];
+            };
+          };
+
+          network = {
+            format-wifi = "{essid}";
+            format-ethernet = "wired";
+            format-disconnected = "offline";
+          };
+
+          battery = {
+            format = "{capacity}%";
+            format-charging = "{capacity}% charging";
+          };
+        };
+      };
+    };
+
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
@@ -334,6 +395,12 @@ in
           touchpad = {
             natural_scroll = true;
           };
+        };
+
+        gesture = "3, horizontal, workspace";
+
+        gestures = {
+          workspace_swipe_invert = true;
         };
 
         animations = {
