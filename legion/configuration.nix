@@ -289,7 +289,7 @@ in
 
         monitor = [
           "DP-2,3440x1440@179.98,0x0,1"
-          "eDP-1,2560x1600@165,3440x0,1"
+          "eDP-1,2560x1600@165,3440x0,1.25"
         ];
 
         workspace = [
@@ -329,6 +329,12 @@ in
 
         env = [ "XDG_SESSION_TYPE,wayland" ];
         cursor = { "no_hardware_cursors" = true; };
+
+        input = {
+          touchpad = {
+            natural_scroll = true;
+          };
+        };
 
         animations = {
           enabled = true;
