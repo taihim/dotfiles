@@ -23,6 +23,49 @@ let
       runHook postInstall
     '';
   };
+
+  waybarPowerProfileStatus = pkgs.writeShellScript "waybar-power-profile-status" ''
+    profile="$(${pkgs.power-profiles-daemon}/bin/powerprofilesctl get 2>/dev/null || true)"
+
+    case "$profile" in
+      performance)
+        text="Performance"
+        ;;
+      balanced)
+        text="Balanced"
+        ;;
+      power-saver)
+        text="Power saver"
+        ;;
+      *)
+        text="Power profile"
+        profile="unknown"
+        ;;
+    esac
+
+    printf '{"text":"%s","tooltip":"Power profile: %s","class":"%s"}\n' "$text" "$text" "$profile"
+  '';
+
+  waybarPowerProfileToggle = pkgs.writeShellScript "waybar-power-profile-toggle" ''
+    current="$(${pkgs.power-profiles-daemon}/bin/powerprofilesctl get 2>/dev/null || true)"
+
+    case "$current" in
+      performance)
+        ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set balanced
+        ;;
+      balanced)
+        ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver
+        ;;
+      power-saver)
+        ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance
+        ;;
+      *)
+        ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set balanced
+        ;;
+    esac
+
+    ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
+  '';
 in
 {
   imports = [ 
@@ -249,6 +292,7 @@ in
           ];
 
           modules-right = [
+            "custom/power-profile"
             "pulseaudio"
             "network"
             "battery"
@@ -268,6 +312,14 @@ in
           clock = {
             format = "{:%H:%M}";
             tooltip-format = "{:%A, %B %d, %Y}";
+          };
+
+          "custom/power-profile" = {
+            exec = "${waybarPowerProfileStatus}";
+            return-type = "json";
+            interval = 10;
+            signal = 8;
+            on-click = "${waybarPowerProfileToggle}";
           };
 
           pulseaudio = {
