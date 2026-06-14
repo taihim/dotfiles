@@ -191,15 +191,16 @@ in
     stress-ng
     
     # Dev & Languages
-    nodejs python3 uv vscode lazydocker bubblewrap
+    nodejs python3 uv vscode lazydocker bubblewrap opencode
     
     # Apps
-    google-chrome spotify vesktop
+    google-chrome spotify vesktop ollama
     
     # Desktop & UI
     ghostty (rofi.override { plugins = [ rofi-calc ]; }) libqalculate waybar qylockTheme
     grim slurp wl-clipboard hypridle brightnessctl wev
-    kdePackages.dolphin kdePackages.kio-extras 
+    nvtopPackages.full
+    nautilus gnome-themes-extra adwaita-icon-theme
     kdePackages.breeze-icons kdePackages.okular
     
     # Audio Control
@@ -216,6 +217,10 @@ in
   virtualisation.docker.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+  };
 
   programs.steam = {
     enable = true;
@@ -272,6 +277,22 @@ in
   home-manager.users.taihim = { pkgs, ... }: {    
     home.stateVersion = "25.11"; 
     programs.home-manager.enable = true;
+
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome-themes-extra;
+      };
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+    };
+
+    home.sessionVariables = {
+      GTK_THEME = "Adwaita:dark";
+    };
 
     programs.bash = {
       enable = true;
@@ -355,6 +376,7 @@ in
       enable = true;
       defaultApplications = {
         "application/pdf" = [ "org.kde.okular.desktop" ];
+        "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "x-scheme-handler/discord" = [ "vesktop.desktop" ];
         "text/html" = [ "google-chrome.desktop" ];
         "x-scheme-handler/http" = [ "google-chrome.desktop" ];
@@ -482,14 +504,15 @@ in
           "$mainMod, B, exec, google-chrome-stable"
           "$mainMod, D, exec, vesktop"
           "$mainMod, M, exec, spotify"
-          "$mainMod, N, exec, code"
+          "$mainMod, N, exec, code --ozone-platform=wayland"
           "$mainMod ALT, B, exec, blueman-manager"
-          "$mainMod, F, exec, dolphin"
+          "$mainMod, F, exec, nautilus"
           "$mainMod, C, killactive"
           "$mainMod SHIFT, L, exit"
           "$mainMod SHIFT, P, exec, systemctl poweroff"
           "$mainMod SHIFT, O, exec, systemctl reboot"
           "$mainMod, Return, exec, ghostty -e btop"
+          "$mainMod SHIFT, Return, exec, ghostty -e nvtop"
           "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
 
           # Focus Movement
