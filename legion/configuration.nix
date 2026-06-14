@@ -187,7 +187,7 @@ in
 
   environment.systemPackages = with pkgs; [
     # Core Utilities
-    vim gcc gnumake git curl btop fastfetch
+    vim clang gnumake git curl btop fastfetch
     stress-ng
     
     # Dev & Languages
@@ -205,6 +205,13 @@ in
     # Audio Control
     pamixer pavucontrol blueman
   ];
+
+  environment.sessionVariables = {
+    CC = "clang";
+    CXX = "clang++";
+    CPP = "clang-cpp";
+    LD = "clang++";
+  };
 
   virtualisation.docker.enable = true;
   services.gvfs.enable = true;
